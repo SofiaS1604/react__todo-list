@@ -1,13 +1,15 @@
-const path = require('path');
-const webpack = require('webpack');
+const path = require("path");
+const webpack = require("webpack");
 
-const htmlWebpackPugPlugin = require('html-webpack-pug-plugin');
-const htmlWebpackPlugin = require('html-webpack-plugin');
+const htmlWebpackHarddiskPlugin = require("html-webpack-harddisk-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
-let ExtractTextPlugin = require('extract-text-webpack-plugin');
-let devFlagPlugin = new webpack.DefinePlugin({
+
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var devFlagPlugin = new webpack.DefinePlugin({
     __DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'false'))
-})
+});
 
 module.exports = {
     entry: [
@@ -23,39 +25,52 @@ module.exports = {
                 test: /\.(js|jsx)$/,
                 exclude: /(node_modules|bower_components)/,
                 loader: "babel-loader",
-                options: {presets: ["@babel/env"]}
+                options: {presets: ["@babel/env", "@babel/react"]}
             },
             {
-                test: /\.(scss|sass)$/,
+                test: /\.css$/,
+                use: ['css-loader']
+            },
+            {
+                test: /\.styl/,
                 use: [
                     {
-                        loader: "style-loader"
+                        loader: `style-loader`
                     },
                     {
-                        loader: "css-loader"
+                        loader: `css-loader`
                     },
                     {
-                        loader: "sass-loader"
+                        loader: `stylus-loader`
                     }
                 ]
             },
             {
-                test: /\.pug$/,
-                loader: 'pug-loader'
+                test: /\.hbs$/,
+                loader: 'handlebars-loader'
             }
         ]
     },
     resolve: {
-        extensions: ["*", ".js", ".jsx", ".json"]
+        extensions: ["*", ".js", ".jsx", ".json", ".sass"],
+        alias: {
+            view: path.resolve(__dirname, './src/view'),
+        }
     },
     output: {
-        path: path.resolve(__dirname, "public/"),
-        publicPath: "/public/",
-        filename: "bundle.js"
+        publicPath: "/",
+    },
+    devServer: {
+        contentBase: path.join(__dirname, "public/"),
+        port: 3000,
+        publicPath: "http://localhost:3000/dist/",
+        hotOnly: true
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
-        new htmlWebpackPlugin({
+        new MiniCssExtractPlugin(),
+
+        new HtmlWebpackPlugin({
             alwaysWriteToDisk: true,
             title: "todo list",
             filename: "index.html",
@@ -64,7 +79,7 @@ module.exports = {
             hash: true,
             inject: false
         }),
-        new htmlWebpackPugPlugin(),
+        new htmlWebpackHarddiskPlugin(),
         new webpack.DefinePlugin({
             'process.env':
                 {NODE_ENV: JSON.stringify('development')}
@@ -72,4 +87,4 @@ module.exports = {
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoEmitOnErrorsPlugin()
     ]
-}
+};
