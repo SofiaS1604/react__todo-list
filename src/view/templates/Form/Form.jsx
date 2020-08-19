@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {bindAll} from 'lodash';
 
-import Input from "./../../atoms/Input/Input"
+import Input from "view/atoms/Input/Input"
+import Button from "view/atoms/Button/Button";
 
 class Form extends React.Component {
     constructor(props) {
@@ -22,11 +23,16 @@ class Form extends React.Component {
         this.setState({valueInput});
     }
 
+    submitForm(){
+        console.log(1);
+    }
+
     render() {
         const {valueInput} = this.state;
         return (
-            <div className="todo_list">
-                <Input label='text' onChange={this.valueForm} value={valueInput}/>
+            <div className="todo_form">
+                <Input label={'text'} onChange={this.valueForm} value={valueInput}/>
+                <Button text={'Add'} onClick={this.submitForm}/>
             </div>
         );
     }

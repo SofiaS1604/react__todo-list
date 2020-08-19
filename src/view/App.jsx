@@ -6,7 +6,6 @@ import {bindAll} from 'lodash';
 import Form from "./templates/Form/Form"
 
 class App extends React.Component {
-
     render() {
         return (
             <div className="todo_list">
