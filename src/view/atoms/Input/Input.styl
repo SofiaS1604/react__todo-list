@@ -1,32 +1,13 @@
-.form
-  &__group
-    display flex
-    flex-direction column-reverse
-    height 50px
-  &__label
-    transform translate(3px, 25px)
-    transition all 0.3s ease-in-out
-    z-index 1
-    font-size 17px
-    color rgba(16,24,40,0.7)
-    &--active
-      transform translate(3px, 0px)
-      transition all 0.3s ease-in-out
-      font-size 15px
-      color #192535
-  &__input
-    height 30px
-    z-index 2
-    background transparent
-    border 0
-    border-bottom 2px solid #ccc
-    outline none
-    font-size 17px
-    color #192535
-    padding-left 3px
-    transition 0.3s all ease-in-out
-  &__input:focus + &__label
-    transform translate(3px, 0px)
-    transition all 0.3s ease-in-out
-    font-size 15px
-    color #192535
+.form__input
+  background-color #fff
+  font-size 21px
+  box-shadow: 0 5px 15px -3px rgba(0, 0, 0, .3);
+  color black
+  border-radius: 5px;
+  padding 8px 7px
+  width 35vw
+  outline none
+  border 0
+  ::-webkit-input-placeholder
+    color rgba(1,1,1, 0.3)
+

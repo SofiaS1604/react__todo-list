@@ -1,0 +1,44 @@
+.task
+  width 420px
+  background-color white
+  box-shadow: 0 5px 15px -3px rgba(0, 0, 0, .3);
+  border-radius 5px
+  padding 15px;
+  display flex
+
+.task__text
+  align-items center
+  display flex
+  width 360px
+  &--active
+    text-decoration line-through
+
+.task__buttons
+  margin-left 15px
+
+.task__completed
+  font-size 21px
+  color #68e177
+  border 2px solid #68e177
+  padding-left: 12px
+  padding-right: 12px
+  background-color white
+  cursor pointer
+  border-radius 5px
+  text-align center
+
+.task__completed--active
+  background-color #68e177
+  color white
+
+.task__remove
+  font-size 21px
+  margin-top 10px
+  text-align center
+  color #dd3646
+  border 2px solid #dd3646
+  background-color white
+  padding-left: 12px
+  padding-right: 12px
+  cursor pointer
+  border-radius 5px

@@ -7,11 +7,8 @@ class Input extends React.Component {
     constructor(props) {
         super(props);
 
-        console.log(props);
-
         this.state = {
             value: props.value,
-            label: props.label
         };
 
         this.onChangeDebounced = debounce(this.props.onChange);
@@ -25,13 +22,9 @@ class Input extends React.Component {
 
     render() {
         const {value} = this.state;
-        const {label} = this.state;
 
         return (
-            <div className="form__group">
-                <input onChange={this.onChange} type="text" value={value} className="form__input"/>
-                <label className="form__label">{label}</label>
-            </div>
+            <input placeholder={'Inter text task'} onChange={this.onChange} type="text" value={value} className="form__input"/>
         );
     }
 }
@@ -39,13 +32,12 @@ class Input extends React.Component {
 Input.propTypes = {
     onChange: PropTypes.func,
     value: PropTypes.string,
-    label: PropTypes.string
+    onEnterPress: PropTypes.func
 };
 
 Input.defaultProps = {
     onChange: () => null,
     value: '',
-    label: '',
 };
 
 export default Input
